@@ -1,6 +1,6 @@
 # smoghistory
 
-##db
+## db
 table sources
 - id
 - name
@@ -23,11 +23,12 @@ table measurements
 - value_type (avg/point)
 
 
-##backend
-###services
+## backend
+### services
 
 -> GET /locations/
 
+-> GET /sources/
 
 -> GET /measurements/
 - location
@@ -59,9 +60,4 @@ response body:
 
 
 
-
--> GET /locations/
-
-
-
-##front
+## front
