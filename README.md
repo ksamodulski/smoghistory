@@ -36,28 +36,27 @@ table measurements
 - granularity (1h/24h)
 
 response body:
+```json
 {
-"location":"MARYSIN_SZARUGI",
-"granularity":24h
-"history": [
-  {
-  "dateTimeFrom": "2021-06-04T00:00:00.000Z"
-  "dateTimeTo": "2021-06-05T00:00:00.000Z"
-      "measurements": [
-      { 
-      "type": "pm2.5",
-      "value": 5
-      },
-      { 
-      "type": "pm10",
-      "value": 3
-      }
+    "location": "MARYSIN_SZARUGI",
+    "granularity": "24h",
+    "history": [
+        {
+            "dateTimeFrom": "2021-06-04T00:00:00.000Z",
+            "dateTimeTo": "2021-06-05T00:00:00.000Z",
+            "measurements": [
+                {
+                    "type": "pm2.5",
+                    "value": 5
+                },
+                {
+                    "type": "pm10",
+                    "value": 3
+                }
+            ]
+        }
     ]
-   }
-  ]
 }
-
-
-
+```
 
 ## front
