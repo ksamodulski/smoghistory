@@ -11,17 +11,17 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private int sourceId;
+    private int source;
     private String location;
     private String measurementType;
     private int value;
 
-    public int getSourceId() {
-        return sourceId;
+    public int getSource() {
+        return source;
     }
 
-    public void setSourceId(int sourceId) {
-        this.sourceId = sourceId;
+    public void setSource(int source) {
+        this.source = source;
     }
 
     public String getLocation() {
