@@ -31,12 +31,11 @@ class MeasurementController {
         return repository.save(newMeasurement);
     }
 
-//    @PostMapping("locations/{id}/measurements")
-//    Measurement newMeasurement(@PathVariable long id, @RequestBody Measurement newMeasurement) {
-//
-//        newMeasurement.setLocation(???);
-//        return repository.save(newMeasurement);
-//    }
+    @PostMapping("locations/{id}/measurements")
+    Measurement newMeasurement(@PathVariable long id, @RequestBody Measurement newMeasurement) {
+        newMeasurement.setLocation(new Location(id,"","",0,0));
+        return repository.save(newMeasurement);
+    }
 
     @GetMapping("/measurements/{id}")
     Measurement one(@PathVariable Long id) {

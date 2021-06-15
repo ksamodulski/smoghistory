@@ -17,9 +17,9 @@ public class Measurement {
 
     public Measurement() {}
 
-    public Measurement(int value, Location location) {
+    public Measurement(int value, long locationId) {
         this.value = value;
-        this.location = location;
+        this.location = new Location(locationId,"","",0,0);
     }
 
     public long getId() {
