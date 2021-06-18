@@ -12,7 +12,6 @@ class LoadDatabase {
 
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
-
 //    @Bean
 //    CommandLineRunner initLocation(LocationRepository repository) {
 //        return args -> {

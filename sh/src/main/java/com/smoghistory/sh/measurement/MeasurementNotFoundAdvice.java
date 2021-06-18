@@ -12,7 +12,7 @@ class MeasurementNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(MeasurementNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(MeasurementNotFoundException ex) {
+    String measurementNotFoundHandler(MeasurementNotFoundException ex) {
         return ex.getMessage();
     }
 }

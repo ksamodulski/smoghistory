@@ -1,7 +1,6 @@
 package com.smoghistory.sh.measurement;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.smoghistory.sh.location.Location;
 import com.smoghistory.sh.location.LocationRepository;
@@ -16,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 class MeasurementController {
 
     private final MeasurementRepository repository;
+    private final LocationRepository loc;
 
-    MeasurementController(MeasurementRepository repository) {
+    MeasurementController(MeasurementRepository repository, LocationRepository loc
+    ) {
         this.repository = repository;
+        this.loc = loc;
     }
 
     @GetMapping("/measurements")
@@ -26,15 +28,21 @@ class MeasurementController {
         return repository.findAll();
     }
 
-    @PostMapping("/measurements")
-    Measurement newMeasurement(@RequestBody Measurement newMeasurement) {
-        return repository.save(newMeasurement);
-    }
+//    @PostMapping("/measurements")
+//    Measurement newMeasurement(@RequestBody Measurement newMeasurement) {
+//        return repository.save(newMeasurement);
+//    }
 
     @PostMapping("locations/{id}/measurements")
     Measurement newMeasurement(@PathVariable long id, @RequestBody Measurement newMeasurement) {
-        newMeasurement.setLocation(new Location(id,"","",0,0));
+        Location location = loc.getById(id);
+        newMeasurement.setLocation(location);
         return repository.save(newMeasurement);
+    }
+
+    @GetMapping("locations/{id}/measurements")
+    List<Measurement> all(@PathVariable long id) {
+        return repository.findByLocationId(id);
     }
 
     @GetMapping("/measurements/{id}")
@@ -42,26 +50,6 @@ class MeasurementController {
         return repository.findById(id)
                 .orElseThrow(() -> new MeasurementNotFoundException(id));
     }
-
-    @GetMapping("locations/{id}/measurements/")
-    List<Measurement> two(@PathVariable Long id) {
-        return repository.findByLocationId(id);
-    }
-
-
-//    @PutMapping("/measurements/{id}")
-//    Measurement replaceMeasurement(@RequestBody Measurement newMeasurement, @PathVariable Long id) {
-//        return repository.findById(id)
-//                .map(Measurement -> {
-//                    Measurement.setLocation(newMeasurement.getLocation());
-//                    Measurement.setValue(newMeasurement.getValue());
-//                    return repository.save(Measurement);
-//                })
-//                .orElseGet(() -> {
-//                    newMeasurement.setId(id);
-//                    return repository.save(newMeasurement);
-//                });
-//    }
 
     @DeleteMapping("/Measurements/{id}")
     void deleteMeasurement(@PathVariable Long id) {

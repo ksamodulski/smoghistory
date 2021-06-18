@@ -2,11 +2,12 @@ package com.smoghistory.sh.location;
 import com.smoghistory.sh.measurement.Measurement;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Location {
+public class Location implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +21,8 @@ public class Location {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+
+
     private List<Measurement> measurements = new ArrayList<>();
 
     public Location() {}

@@ -1,10 +1,14 @@
 package com.smoghistory.sh.measurement;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.smoghistory.sh.location.Location;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Measurement {
+public class Measurement implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,14 +16,16 @@ public class Measurement {
     private int value;
 
     @ManyToOne(fetch =  FetchType.LAZY)
-    @JoinColumn(name="location_id")
+    @JoinColumn(name = "location_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Location location;
 
     public Measurement() {}
 
-    public Measurement(int value, long locationId) {
+    public Measurement(long id, int value, Location location) {
+        this.id = id;
         this.value = value;
-        this.location = new Location(locationId,"","",0,0);
+        this.location = location;
     }
 
     public long getId() {
@@ -38,10 +44,12 @@ public class Measurement {
         this.value = value;
     }
 
+    @JsonIgnore
     public Location getLocation() {
         return location;
     }
 
+    @JsonSetter
     public void setLocation(Location location) {
         this.location = location;
     }
