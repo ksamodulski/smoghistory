@@ -37,7 +37,7 @@ class MeasurementController {
     Measurement newMeasurement(@PathVariable long id, @RequestBody Measurement newMeasurement) {
         Location location = loc.getById(id);
         newMeasurement.setLocation(location);
-        return repository.save(newMeasurement);
+    return repository.save(newMeasurement);
     }
 
     @GetMapping("locations/{id}/measurements")

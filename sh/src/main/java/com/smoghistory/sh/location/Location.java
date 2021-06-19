@@ -22,7 +22,6 @@ public class Location implements Serializable {
             orphanRemoval = true
     )
 
-
     private List<Measurement> measurements = new ArrayList<>();
 
     public Location() {}
