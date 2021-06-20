@@ -1,6 +1,8 @@
 package com.smoghistory.sh.measurement;
 import com.fasterxml.jackson.annotation.*;
 import com.smoghistory.sh.location.Location;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,6 +27,7 @@ public class Measurement implements Serializable {
     )
     private List<MeasurementDetail> measurementDetailList;
 
+    @Schema(hidden = true)
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "location_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -57,11 +60,13 @@ public class Measurement implements Serializable {
         return location.getId();
     }
 
+    @Schema(hidden = true)
     @JsonIgnore
     public Location getLocation() {
         return location;
     }
 
+    @Schema(hidden = true)
     @JsonSetter
     public void setLocation(Location location) {
         this.location = location;

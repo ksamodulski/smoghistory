@@ -1,5 +1,6 @@
 package com.smoghistory.sh.location;
 import com.smoghistory.sh.measurement.Measurement;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
 import java.io.Serializable;
