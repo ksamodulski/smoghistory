@@ -1,15 +1,11 @@
 package com.smoghistory.sh.measurement;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
 import com.smoghistory.sh.location.Location;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class Measurement implements Serializable {
@@ -17,6 +13,10 @@ public class Measurement implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonProperty(required = true)
+    private Date date;
 
     @OneToMany(
             mappedBy = "measurement",
@@ -50,6 +50,11 @@ public class Measurement implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @JsonGetter
+    public long locationId(){
+        return location.getId();
     }
 
     @JsonIgnore

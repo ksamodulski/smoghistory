@@ -9,9 +9,11 @@ import java.io.Serializable;
 public class MeasurementDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
-    String type;
-    long value;
+    private long id;
+
+    @Enumerated(EnumType.STRING)
+    private MeasurementDetailType type;
+    private long value;
 
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "measurement_id")
@@ -21,7 +23,7 @@ public class MeasurementDetail implements Serializable {
     public MeasurementDetail() {
     }
 
-    public MeasurementDetail(long id, String type, long value, Measurement measurement) {
+    public MeasurementDetail(long id, MeasurementDetailType type, long value, Measurement measurement) {
         this.id = id;
         this.type = type;
         this.value = value;
@@ -36,11 +38,11 @@ public class MeasurementDetail implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
+    public MeasurementDetailType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(MeasurementDetailType type) {
         this.type = type;
     }
 
@@ -51,7 +53,6 @@ public class MeasurementDetail implements Serializable {
     public void setValue(long value) {
         this.value = value;
     }
-
 
     public void setMeasurement(Measurement measurement) {
         this.measurement = measurement;
