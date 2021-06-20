@@ -3,10 +3,10 @@ package com.smoghistory.sh.measurement;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 @Entity
-public class MeasurementDetail {
+public class MeasurementDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
@@ -15,8 +15,11 @@ public class MeasurementDetail {
 
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "measurement_id")
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Measurement measurement;
+
+    public MeasurementDetail() {
+    }
 
     public MeasurementDetail(long id, String type, long value, Measurement measurement) {
         this.id = id;
@@ -49,11 +52,10 @@ public class MeasurementDetail {
         this.value = value;
     }
 
-    public Measurement getMeasurement() {
-        return measurement;
-    }
 
     public void setMeasurement(Measurement measurement) {
         this.measurement = measurement;
     }
+
+
 }

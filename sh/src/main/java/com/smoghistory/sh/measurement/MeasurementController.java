@@ -37,6 +37,7 @@ class MeasurementController {
     Measurement newMeasurement(@PathVariable long id, @RequestBody Measurement newMeasurement) {
         Location location = loc.getById(id);
         newMeasurement.setLocation(location);
+        newMeasurement.linkDetails();
     return repository.save(newMeasurement);
     }
 

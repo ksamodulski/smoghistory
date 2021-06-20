@@ -23,7 +23,7 @@ public class Measurement implements Serializable {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<MeasurementDetail> measurementDetailList = new ArrayList<>();
+    private List<MeasurementDetail> measurementDetailList;
 
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "location_id")
@@ -36,6 +36,12 @@ public class Measurement implements Serializable {
         this.id = id;
         this.measurementDetailList = measurementDetailList;
         this.location = location;
+    }
+
+    public void linkDetails(){
+        for (MeasurementDetail detail : measurementDetailList) {
+            detail.setMeasurement(this);
+        }
     }
 
     public long getId() {
@@ -56,7 +62,6 @@ public class Measurement implements Serializable {
         this.location = location;
     }
 
-    @JsonGetter
     public List<MeasurementDetail> getMeasurementDetailList() {
         return measurementDetailList;
     }

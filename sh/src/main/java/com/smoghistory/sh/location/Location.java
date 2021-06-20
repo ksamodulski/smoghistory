@@ -21,7 +21,6 @@ public class Location implements Serializable {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-
     private List<Measurement> measurements = new ArrayList<>();
 
     public Location() {}
