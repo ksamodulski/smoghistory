@@ -1,7 +1,7 @@
 # smoghistory
 
 ## db
-table sources
+Table sources
 - id
 - name
 - details
